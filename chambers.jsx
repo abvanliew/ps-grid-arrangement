@@ -43,7 +43,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/1-5c" ),
         findLayerSetByPath( "Top/Mid Lines/1-7" ),
         findLayerSetByPath( "Top/Mid Lines/1-9c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, 0, 0 ]
     },
     3: {
       "Art": findLayerSetByPath( "Chambers/Center_Right" ),
@@ -52,7 +53,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/3-7c" ),
         findLayerSetByPath( "Top/Mid Lines/3-9" ),
         findLayerSetByPath( "Top/Mid Lines/3-11c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, 0, 0 ]
     },
     5: {
       "Art": findLayerSetByPath( "Chambers/Low_Right" ),
@@ -61,7 +63,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/5-9c" ),
         findLayerSetByPath( "Top/Mid Lines/5-11" ),
         findLayerSetByPath( "Top/Mid Lines/5-1c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, 0, 0 ]
     },
     7: {
       "Art": findLayerSetByPath( "Chambers/Low_Left" ),
@@ -70,7 +73,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/7-11c" ),
         findLayerSetByPath( "Top/Mid Lines/7-1" ),
         findLayerSetByPath( "Top/Mid Lines/7-3c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, 0, 0 ]
     },
     9: {
       "Art": findLayerSetByPath( "Chambers/Center_Left" ),
@@ -79,7 +83,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/9-1c" ),
         findLayerSetByPath( "Top/Mid Lines/9-3" ),
         findLayerSetByPath( "Top/Mid Lines/9-5c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, 0, 0 ]
     },
     11: {
       "Art": findLayerSetByPath( "Chambers/Up_Left" ),
@@ -88,7 +93,8 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/11-3c" ),
         findLayerSetByPath( "Top/Mid Lines/11-5" ),
         findLayerSetByPath( "Top/Mid Lines/11-7c" )
-      ]
+      ],
+	  "VerticalOffset": [ 0, -.12, 0 ]
     }
   }
 };
@@ -146,7 +152,7 @@ function createChamber( chamberCard, cardNumber )
   icons.ChamberIcons[ chamberIndex ].VisibleChamber.visible = true;
   icons.ChamberIcons[ chamberIndex ].BlockBrushStroke[ blockIndex ].visible = true;
 
-  createHex( chamberCard.ChamberHex, cardNumber );
+  createHex( chamberCard.ChamberHex, cardNumber, icons.ChamberIcons[ chamberIndex ].VerticalOffset[ blockIndex ] );
 
   icons.SlashDamageIcon[slashIndex].visible = false;
   icons.ParryDamageIcon[parryIndex].visible = false;
@@ -167,7 +173,7 @@ function prepLayer( parentLayer, row, column )
   return newLayer;
 }
 
-function createHex( chamberTypes, cardNumber )
+function createHex( chamberTypes, cardNumber, verticalOffset )
 {
   var hexLayers = [];
   var hexRow = [];
@@ -233,7 +239,7 @@ function createHex( chamberTypes, cardNumber )
 
   var flattenedHex = newHexLayerSet.merge();
 
-  flattenedHex.translate( 1.373, 0 );
+  flattenedHex.translate( 1.373, verticalOffset );
   flattenedHex.resize( null, -100, AnchorPosition.MIDDLECENTER );
 
   saveDocHighQualityJpg( "/Users/fireball4/Desktop/chambers/chamber-" + cardNumber.toString() );
