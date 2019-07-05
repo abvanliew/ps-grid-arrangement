@@ -2,13 +2,6 @@ var active = app.activeDocument;
 var data = loadChamberData();
 var pathChar = '/';
 
-var slashIndex = 0;
-var parryIndex = 0;
-var thrustIndex = 0;
-
-var chamberIndex = 0;
-var blockIndex = 0;
-
 var hexDeltas = [
   [ { "x": -.098, "y": -.18 }, { "x": .11, "y": -.18 } ],
   [ { "x": -.2, "y": 0 }, { "x": 0, "y": 0 }, { "x": .21, "y": 0 } ],
@@ -138,12 +131,12 @@ function findLayerByPath( layerPath, bottomLayerType )
 
 function createChamber( chamberCard, cardNumber )
 {
-  slashIndex = chamberCard.SlashDamage - 1;
-  parryIndex = chamberCard.ParryDamage - 1;
-  thrustIndex = chamberCard.ThrustDamage - 1;
+  var slashIndex = chamberCard.SlashDamage - 1;
+  var parryIndex = chamberCard.ParryDamage - 1;
+  var thrustIndex = chamberCard.ThrustDamage - 1;
 
-  chamberIndex = chamberCard.ChamberPosistion;
-  blockIndex = chamberCard.BlockDirection;
+  var chamberIndex = chamberCard.ChamberPosistion;
+  var blockIndex = chamberCard.BlockDirection;
 
   icons.SlashDamageIcon[slashIndex].visible = true;
   icons.ParryDamageIcon[parryIndex].visible = true;
@@ -272,48 +265,581 @@ function saveDocHighQualityJpg( filePath )
 function loadChamberData()
 {
   return [
-    { 
-      "ChamberPosistion": 9,  //1 o'clock, 3 o'clock, etc
-      "BlockDirection": 1, //0: CLOCKWISE, 1: STRAIGHT, 2: COUNTER
-      "SlashDamage": 3,
-      "ThrustDamage": 2,
-      "ParryDamage": 1,
-      "ChamberHex": [
-        [ "SLASH", null ],
-        [ "SLASH", "THRUST", "BLOCK" ],
-        [ "PARRY", "PARRY" ]
-      ]
+    { // card # 1
+      "ChamberPosistion": 9, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "SLASH", null ], 
+        [ "SLASH", "THRUST", "BLOCK" ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
     },
-    { 
-      "ChamberPosistion": 3,
-      "BlockDirection": 0, //0: CLOCKWISE, 1: STRAIGHT, 2: COUNTER
-      "SlashDamage": 2,
-      "ThrustDamage": 3,
-      "ParryDamage": 2,
-      "ChamberHex": [
-        [ "PARRY", "PARRY" ],
-        [ null, "SLASH", "SLASH" ],
-        [ "BLOCK", "THRUST" ]
-      ]
+    { // card # 2
+      "ChamberPosistion": 9, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ "SLASH", "BLOCK", "THRUST" ], 
+        [ "SLASH", null ] 
+      ] 
+    },
+    { // card # 3
+      "ChamberPosistion": 9, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "THRUST" ], 
+        [ "PARRY", "BLOCK", "BLOCK" ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 4
+      "ChamberPosistion": 9, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ "PARRY", "BLOCK", "BLOCK" ], 
+        [ "PARRY", "THRUST" ] 
+      ] 
+    },
+    { // card # 5
+      "ChamberPosistion": 9, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "THRUST", "BLOCK" ], 
+        [ "SLASH", "SLASH", null ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
+    },
+    { // card # 6
+      "ChamberPosistion": 9, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ "PARRY", "PARRY", null ], 
+        [ "THRUST", "BLOCK" ] 
+      ] 
+    },
+    { // card # 7
+      "ChamberPosistion": 9, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "BLOCK", "BLOCK" ], 
+        [ "THRUST", "PARRY", "PARRY" ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 8
+      "ChamberPosistion": 9, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ "THRUST", "SLASH", "SLASH" ], 
+        [ "BLOCK", "BLOCK" ] 
+      ] 
+    },
+    { // card # 9
+      "ChamberPosistion": 11, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ "PARRY", "THRUST", null ], 
+        [ "PARRY", "BLOCK" ] 
+      ] 
+    },
+    { // card # 10
+      "ChamberPosistion": 11, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "PARRY" ], 
+        [ "SLASH", "BLOCK", "PARRY" ], 
+        [ null, "THRUST" ] 
+      ] 
+    },
+    { // card # 11
+      "ChamberPosistion": 11, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ "SLASH", "BLOCK", "THRUST" ], 
+        [ "SLASH", "BLOCK" ] 
+      ] 
+    },
+    { // card # 12
+      "ChamberPosistion": 11, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "PARRY", "BLOCK", "SLASH" ], 
+        [ "THRUST", "BLOCK" ] 
+      ] 
+    },
+    { // card # 13
+      "ChamberPosistion": 11, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "SLASH", "THRUST" ], 
+        [ "PARRY", "SLASH", "BLOCK" ], 
+        [ "PARRY", null ] 
+      ] 
+    },
+    { // card # 14
+      "ChamberPosistion": 11, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "THRUST", "PARRY", "SLASH" ], 
+        [ "BLOCK", null ] 
+      ] 
+    },
+    { // card # 15
+      "ChamberPosistion": 11, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "THRUST", "BLOCK" ], 
+        [ "SLASH", "PARRY", "BLOCK" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 16
+      "ChamberPosistion": 11, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "THRUST", "PARRY" ], 
+        [ "BLOCK", "SLASH", "PARRY" ], 
+        [ "BLOCK", "SLASH" ] 
+      ] 
+    },
+    { // card # 17
+      "ChamberPosistion": 1, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "PARRY", "THRUST", "SLASH" ], 
+        [ "BLOCK", null ] 
+      ] 
+    },
+    { // card # 18
+      "ChamberPosistion": 1, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ null, "BLOCK", "PARRY" ], 
+        [ "THRUST", "PARRY" ] 
+      ] 
+    },
+    { // card # 19
+      "ChamberPosistion": 1, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "PARRY" ], 
+        [ "SLASH", "BLOCK", "PARRY" ], 
+        [ "BLOCK", "THRUST" ] 
+      ] 
+    },
+    { // card # 20
+      "ChamberPosistion": 1, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ "THRUST", "BLOCK", "SLASH" ], 
+        [ "BLOCK", "SLASH" ] 
+      ] 
+    },
+    { // card # 21
+      "ChamberPosistion": 1, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "PARRY", "SLASH", "THRUST" ], 
+        [ null, "BLOCK" ] 
+      ] 
+    },
+    { // card # 22
+      "ChamberPosistion": 1, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "THRUST", "PARRY" ], 
+        [ "BLOCK", "PARRY", "SLASH" ], 
+        [ null, "SLASH" ] 
+      ] 
+    },
+    { // card # 23
+      "ChamberPosistion": 1, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "SLASH", "THRUST" ], 
+        [ "SLASH", "PARRY", "BLOCK" ], 
+        [ "PARRY", "BLOCK" ] 
+      ] 
+    },
+    { // card # 24
+      "ChamberPosistion": 1, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "BLOCK", "THRUST" ], 
+        [ "BLOCK", "SLASH", "PARRY" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 25
+      "ChamberPosistion": 3, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ "BLOCK", "THRUST", "SLASH" ], 
+        [ null, "SLASH" ] 
+      ] 
+    },
+    { // card # 26
+      "ChamberPosistion": 3, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ null, "SLASH" ], 
+        [ "THRUST", "BLOCK", "SLASH" ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
+    },
+    { // card # 27
+      "ChamberPosistion": 3, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ "BLOCK", "BLOCK", "PARRY" ], 
+        [ "THRUST", "PARRY" ] 
+      ] 
+    },
+    { // card # 28
+      "ChamberPosistion": 3, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "THRUST", "PARRY" ], 
+        [ "BLOCK", "BLOCK", "PARRY" ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 29
+      "ChamberPosistion": 3, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "PARRY", "PARRY" ], 
+        [ null, "SLASH", "SLASH" ], 
+        [ "BLOCK", "THRUST" ] 
+      ] 
+    },
+    { // card # 30
+      "ChamberPosistion": 3, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "BLOCK", "THRUST" ], 
+        [ null, "PARRY", "PARRY" ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 31
+      "ChamberPosistion": 3, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "SLASH", "SLASH" ], 
+        [ "PARRY", "PARRY", "THRUST" ], 
+        [ "BLOCK", "BLOCK" ] 
+      ] 
+    },
+    { // card # 32
+      "ChamberPosistion": 3, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "BLOCK", "BLOCK" ], 
+        [ "SLASH", "SLASH", "THRUST" ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
+    },
+    { // card # 33
+      "ChamberPosistion": 5, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "BLOCK", "PARRY" ], 
+        [ null, "THRUST", "PARRY" ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 34
+      "ChamberPosistion": 5, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "THRUST", null ], 
+        [ "PARRY", "BLOCK", "SLASH" ], 
+        [ "PARRY", "SLASH" ] 
+      ] 
+    },
+    { // card # 35
+      "ChamberPosistion": 5, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "BLOCK", "SLASH" ], 
+        [ "THRUST", "BLOCK", "SLASH" ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
+    },
+    { // card # 36
+      "ChamberPosistion": 5, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "BLOCK", "THRUST" ], 
+        [ "SLASH", "BLOCK", "PARRY" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 37
+      "ChamberPosistion": 5, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ null, "PARRY" ], 
+        [ "BLOCK", "SLASH", "PARRY" ], 
+        [ "THRUST", "SLASH" ] 
+      ] 
+    },
+    { // card # 38
+      "ChamberPosistion": 5, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ null, "BLOCK" ], 
+        [ "SLASH", "PARRY", "THRUST" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 39
+      "ChamberPosistion": 5, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "BLOCK", "PARRY", "SLASH" ], 
+        [ "BLOCK", "THRUST" ] 
+      ] 
+    },
+    { // card # 40
+      "ChamberPosistion": 5, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "SLASH", "BLOCK" ], 
+        [ "PARRY", "SLASH", "BLOCK" ], 
+        [ "PARRY", "THRUST" ] 
+      ] 
+    },
+    { // card # 41
+      "ChamberPosistion": 7, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ null, "BLOCK" ], 
+        [ "SLASH", "THRUST", "PARRY" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 42
+      "ChamberPosistion": 7, 
+      "BlockDirection": 1, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "PARRY", "THRUST" ], 
+        [ "PARRY", "BLOCK", null ], 
+        [ "SLASH", "SLASH" ] 
+      ] 
+    },
+    { // card # 43
+      "ChamberPosistion": 7, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "THRUST", "BLOCK" ], 
+        [ "PARRY", "BLOCK", "SLASH" ], 
+        [ "PARRY", "SLASH" ] 
+      ] 
+    },
+    { // card # 44
+      "ChamberPosistion": 7, 
+      "BlockDirection": 1, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 1, 
+      "ChamberHex": [ 
+        [ "SLASH", "BLOCK" ], 
+        [ "SLASH", "BLOCK", "THRUST" ], 
+        [ "PARRY", "PARRY" ] 
+      ] 
+    },
+    { // card # 45
+      "ChamberPosistion": 7, 
+      "BlockDirection": 0, 
+      "SlashDamage": 3, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "BLOCK", null ], 
+        [ "THRUST", "SLASH", "PARRY" ], 
+        [ "SLASH", "PARRY" ] 
+      ] 
+    },
+    { // card # 46
+      "ChamberPosistion": 7, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 2, 
+      "ThrustDamage": 2, 
+      "ChamberHex": [ 
+        [ "SLASH", null ], 
+        [ "SLASH", "PARRY", "BLOCK" ], 
+        [ "PARRY", "THRUST" ] 
+      ] 
+    },
+    { // card # 47
+      "ChamberPosistion": 7, 
+      "BlockDirection": 0, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "BLOCK", "PARRY" ], 
+        [ "BLOCK", "PARRY", "SLASH" ], 
+        [ "THRUST", "SLASH" ] 
+      ] 
+    },
+    { // card # 48
+      "ChamberPosistion": 7, 
+      "BlockDirection": 2, 
+      "SlashDamage": 2, 
+      "ParryDamage": 1, 
+      "ThrustDamage": 3, 
+      "ChamberHex": [ 
+        [ "PARRY", "SLASH" ], 
+        [ "PARRY", "SLASH", "BLOCK" ], 
+        [ "THRUST", "BLOCK" ] 
+      ] 
     }
   ];
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
