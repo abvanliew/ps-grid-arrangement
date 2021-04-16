@@ -44,7 +44,7 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/1-7" ),
         findLayerSetByPath( "Top/Mid Lines/1-9c" )
       ],
-	  "VerticalOffset": [ 0, 0, 0 ]
+	  "VerticalOffset": [ -.077, -.12, -.033 ]
     },
     3: {
       "Art": findLayerSetByPath( "Chambers/Center_Right" ),
@@ -64,7 +64,7 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/5-11" ),
         findLayerSetByPath( "Top/Mid Lines/5-1c" )
       ],
-	  "VerticalOffset": [ 0, 0, 0 ]
+	  "VerticalOffset": [ 0, .013, -.07 ]
     },
     7: {
       "Art": findLayerSetByPath( "Chambers/Low_Left" ),
@@ -74,7 +74,7 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/7-1" ),
         findLayerSetByPath( "Top/Mid Lines/7-3c" )
       ],
-	  "VerticalOffset": [ 0, 0, 0 ]
+	  "VerticalOffset": [ -.05, .013, 0 ]
     },
     9: {
       "Art": findLayerSetByPath( "Chambers/Center_Left" ),
@@ -94,17 +94,17 @@ var icons =
         findLayerSetByPath( "Top/Mid Lines/11-5" ),
         findLayerSetByPath( "Top/Mid Lines/11-7c" )
       ],
-	  "VerticalOffset": [ 0, -.12, 0 ]
+	  "VerticalOffset": [ -.033, -.12, -.077 ]
     }
   }
 };
 
-//alert( data.length );
-
 for( x = 0; x < data.length; x++)
 {
-  createChamber( data[x], x + 1 );
-}
+  createChamber( data[x], numberFormatLeadingZero( x + 1, data.length ) );
+} 
+
+
 
 //Find a layer by passing in an array of names
 function findArtLayerByPath( layerPath ) { return findLayerByPath( layerPath, "ART" ); }
@@ -242,7 +242,7 @@ function createHex( chamberTypes, cardNumber, verticalOffset )
   flattenedHex.translate( 1.373, verticalOffset );
   flattenedHex.resize( null, -100, AnchorPosition.MIDDLECENTER );
 
-  saveDocHighQualityJpg( "/Users/fireball4/Desktop/chambers/chamber-" + cardNumber.toString() );
+  saveDocHighQualityJpg( "/Users/fireball4/Desktop/chambers/chamber-offset-" + cardNumber );
 
   flattenedHex.remove();
 
@@ -266,6 +266,14 @@ function saveDocHighQualityJpg( filePath )
   saveOptions.quality = 12;
 
   active.saveAs( saveName, saveOptions, true, Extension.LOWERCASE );
+}
+
+function numberFormatLeadingZero( number, maxNumber )
+{
+  // var amountZeros = ( number.toString().length >= maxNumber.toString().length ) ? 0 : maxNumber.toString().length - number.toString().length;
+  // return "0".repeat( amountZeros ) + number.toString();
+  
+  return number.toString();
 }
 
 function loadChamberData()
